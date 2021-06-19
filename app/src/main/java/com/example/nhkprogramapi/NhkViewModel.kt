@@ -11,9 +11,9 @@ class NhkViewModel: ViewModel() {
         val repository = NhkRepository()
     }
 
-    fun getProgramTitle(callBack: (String) -> Unit){
+    fun getProgramTitle(date: String,callBack: (String) -> Unit){
         viewModelScope.launch(Dispatchers.IO) {
-            Repository.repository.getProgramTitle()
+            Repository.repository.getProgramTitle(date)
                 .onSuccess {
                     Log.d("viewModel", it)
                     callBack(it)

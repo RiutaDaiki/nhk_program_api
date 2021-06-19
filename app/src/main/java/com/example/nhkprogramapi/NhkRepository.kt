@@ -11,17 +11,18 @@ import kotlin.coroutines.suspendCoroutine
 
 class NhkRepository {
 
-    suspend fun getProgramTitle(): Result<String>{
+    suspend fun getProgramTitle(date: String): Result<String>{
+
 
         return kotlin.runCatching {
             suspendCoroutine<String> { continuation ->
                 GlobalScope.launch {
                     val nhkService = returnService()
-                    val response = nhkService.getProgramInfo("130", "e1", "2021-06-19", "nEltUYm0D37087JcmXSnbNVYZEnGm1mY")
+                    val response = nhkService.getProgramInfo("190", "g1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        Log.d("debug", article?.list?.e1?.get(1)?.title ?: "ぬる")
-                        continuation.resume(article?.list?.e1?.get(1)?.title.toString())
+                        Log.d("debug", article?.list?.g1?.get(1)?.title ?: "ぬる")
+                        continuation.resume(article?.list?.g1?.get(6)?.title.toString())
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
