@@ -13,7 +13,6 @@ class NhkRepository {
 
     suspend fun getProgramTitle(date: String): Result<String>{
 
-
         return kotlin.runCatching {
             suspendCoroutine<String> { continuation ->
                 GlobalScope.launch {
@@ -21,21 +20,15 @@ class NhkRepository {
                     val response = nhkService.getProgramInfo("190", "g1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        Log.d("debug", article?.list?.g1?.get(1)?.title ?: "ぬる")
                         continuation.resume(article?.list?.g1?.get(6)?.title.toString())
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
                     }
-
                 }
             }
-
-
-
         }
     }
-
 
     private fun returnService(): NhkService{
         return Retrofit.Builder()

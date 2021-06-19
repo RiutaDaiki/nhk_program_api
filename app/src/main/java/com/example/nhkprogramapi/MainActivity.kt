@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         viewModel.getProgramTitle(localDate()) {
-            Log.d("デバッグ", it)
             set(it)
         }
 
