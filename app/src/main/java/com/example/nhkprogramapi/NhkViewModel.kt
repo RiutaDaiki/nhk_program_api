@@ -12,6 +12,7 @@ class NhkViewModel: ViewModel() {
     }
 
     fun getProgramTitle(date: String,callBack: (String) -> Unit){
+        Log.d("date", date)
         viewModelScope.launch(Dispatchers.IO) {
             Repository.repository.getProgramTitle(date)
                 .onSuccess {

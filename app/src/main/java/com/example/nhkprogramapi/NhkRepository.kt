@@ -1,6 +1,6 @@
 package com.example.nhkprogramapi
 
-import android.util.Log
+import com.example.nhkprogramapi.entity.NhkBsPremium
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -17,10 +17,10 @@ class NhkRepository {
             suspendCoroutine<String> { continuation ->
                 GlobalScope.launch {
                     val nhkService = returnService()
-                    val response = nhkService.getProgramInfo("190", "g1", date, BuildConfig.API_KEY)
+                    val response = nhkService.getProgramInfo("190", "s3", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.g1?.get(6)?.title.toString())
+                        continuation.resume(article?.list?.s3?.get(25)?.title.toString())
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
@@ -30,11 +30,11 @@ class NhkRepository {
         }
     }
 
-    private fun returnService(): NhkService{
+    private fun returnService(): NhkBsPremium{
         return Retrofit.Builder()
             .baseUrl("https://api.nhk.or.jp/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-            .create(NhkService::class.java)
+            .create(NhkBsPremium::class.java)
     }
 }

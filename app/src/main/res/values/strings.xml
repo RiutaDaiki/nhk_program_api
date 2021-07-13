@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NHK program api</string>
+    <string name="cancel">キャンセル</string>
+    <string name="serch">検索</string>
+    <string name="sougou">総合</string>
+    <string name="etele">Eテレ</string>
 </resources>
