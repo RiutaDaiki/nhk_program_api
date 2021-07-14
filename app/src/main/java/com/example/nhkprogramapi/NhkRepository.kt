@@ -42,7 +42,7 @@ class NhkRepository {
                     val response = returnEteleService().getProgramInfo("190", "e1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.e1?.get(25)?.title.toString())
+                        continuation.resume(article?.list?.e1?.get(0)?.title.toString())
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
@@ -61,7 +61,7 @@ class NhkRepository {
                     val response = returnBsService().getProgramInfo("190", "s1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.s1?.get(25)?.title.toString())
+                        continuation.resume(article?.list?.s1?.get(0)?.title.toString())
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
@@ -80,7 +80,7 @@ class NhkRepository {
                     val response = returnBsPremiumService().getProgramInfo("190", "s3", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.s3?.get(25)?.title.toString())
+                        continuation.resume(article?.list?.s3?.get(0)?.title.toString())
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
