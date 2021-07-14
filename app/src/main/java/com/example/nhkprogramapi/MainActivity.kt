@@ -11,6 +11,8 @@ import android.widget.Button
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
 import com.example.nhkprogramapi.databinding.BottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -47,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 //                set(it)
 //            }
 //        }
+
+        viewModel.serviceId.observe(this){
+            println("acti")
+            println(it.toString())
+        }
 
     }
 

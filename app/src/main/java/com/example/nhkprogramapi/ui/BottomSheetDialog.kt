@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import com.example.nhkprogramapi.NhkViewModel
 import com.example.nhkprogramapi.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.example.nhkprogramapi.databinding.BottomSheetBinding
@@ -14,19 +17,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetDialog: BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetBinding
-
+    private val viewModel: NhkViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,
-        R.layout.bottom_sheet,
-        container,
-        false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet, container, false)
         binding.lifecycleOwner = this
+        binding.cancelButton.setOnClickListener {
+            this.dismiss()
+        }
         binding.searchButton.setOnClickListener {
-            println("検索")
+            val id = binding.segment.checkedRadioButtonId
+            viewModel.serviceId.value = id
         }
         return binding.root
     }

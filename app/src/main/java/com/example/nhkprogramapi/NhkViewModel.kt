@@ -25,7 +25,5 @@ class NhkViewModel: ViewModel() {
                 }
         }
     }
-
-    val isBottomSheetExpanded = MutableLiveData<Boolean>()
-
+    val serviceId = MutableLiveData<Int>()
 }
