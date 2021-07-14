@@ -6,26 +6,28 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.nhkprogramapi.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel : NhkViewModel by viewModels()
+    private val viewModel: NhkViewModel by viewModels()
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        fun set(s: String){
+        fun set(s: String) {
             val mainHandler = Handler(Looper.getMainLooper())
-            val text = findViewById<TextView>(R.id.text)
+            val text = binding.text
             try {
                 mainHandler.post { text.text = s }
             } catch (e: Exception) {
@@ -33,29 +35,29 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //#2 Initializing the BottomSheetBehavior
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        val bottomSheet = findViewById<ConstraintLayout>(R.id.bottomSheet)
+        bottomSheet.findViewById<Button>(R.id.ca)
 
-        //#3 Listening to State Changes of BottomSheet
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheet))
+
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                buttonBottomSheetPersistent.text = when (newState) {
-                    BottomSheetBehavior.STATE_EXPANDED -> "Close Persistent Bottom Sheet"
-                    BottomSheetBehavior.STATE_COLLAPSED -> "Open Persistent Bottom Sheet"
-                    else -> "Persistent Bottom Sheet"
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> viewModel.isBottomSheetExpanded.value = true
+                    BottomSheetBehavior.STATE_COLLAPSED -> viewModel.isBottomSheetExpanded.value = false
+                    else -> {}
                 }
             }
         })
 
 
-        //#4 Changing the BottomSheet State on ButtonClick
-        buttonBottomSheetPersistent.setOnClickListener {
+        binding.fab.setOnClickListener {
             val state =
-                if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
+                if (viewModel.isBottomSheetExpanded.value == true)
                     BottomSheetBehavior.STATE_COLLAPSED
                 else
                     BottomSheetBehavior.STATE_EXPANDED
@@ -68,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
         return LocalDate.now().toString()

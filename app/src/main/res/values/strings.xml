@@ -4,4 +4,6 @@
     <string name="serch">検索</string>
     <string name="sougou">総合</string>
     <string name="etele">Eテレ</string>
+    <string name="bs">BS</string>
+    <string name="bs_premium">BSプレミアム</string>
 </resources>
