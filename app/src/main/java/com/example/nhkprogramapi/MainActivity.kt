@@ -8,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +23,6 @@ import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: NhkViewModel by viewModels()
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,21 +44,21 @@ class MainActivity : AppCompatActivity() {
             com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
         }
 
-//        findViewById<Button>(R.id.button).setOnClickListener{
-//            viewModel.getProgramTitle(localDate()) {
-//                set(it)
-//            }
-//        }
-
         viewModel.serviceId.observe(this){
-            println("acti")
-            println(it.toString())
+
+            when(it){
+                -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
+                else -> viewModel.getProgramTitle(localDate(), it){
+                    set(it)
+                }
+            }
         }
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
+        println(LocalDate.now().toString())
         return LocalDate.now().toString()
     }
 }

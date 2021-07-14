@@ -12,17 +12,41 @@ class NhkViewModel: ViewModel() {
         val repository = NhkRepository()
     }
 
-    fun getProgramTitle(date: String,callBack: (String) -> Unit){
+    val serviceIdMap = mapOf<Int, String>(
+        2131231064 to "g1",
+        2131230879 to "e1",
+        2131230808 to "s1",
+        2131230809 to "s3"
+    )
+
+    fun getProgramTitle(date: String, service: Int,callBack: (String) -> Unit){
         Log.d("date", date)
         viewModelScope.launch(Dispatchers.IO) {
-            Repository.repository.getProgramTitle(date)
-                .onSuccess {
-                    Log.d("viewModel", it)
-                    callBack(it)
+            when(serviceIdMap[service]){
+                "g1" -> Repository.repository.getSougouProgramTitle(date)
+                    .onSuccess {
+                        callBack(it)
+                    }
+                "e1" ->{
+                    Repository.repository.getEteleProgramTitle(date)
+                        .onSuccess {
+                            callBack(it)
+                        }
                 }
-                .onFailure {
-                    Log.d("viewModel", it.toString())
+                "s1" -> {
+                    Repository.repository.getBsProgramTitle(date)
+                        .onSuccess {
+                            callBack(it)
+                        }
                 }
+                "s3" -> {
+                    Repository.repository.getBsPremiumProgramTitle(date)
+                        .onSuccess {
+                            callBack(it)
+                        }
+                }
+            }
+
         }
     }
     val serviceId = MutableLiveData<Int>()

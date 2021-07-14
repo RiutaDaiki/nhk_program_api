@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.nhkprogramapi.NhkViewModel
@@ -25,13 +24,18 @@ class BottomSheetDialog: BottomSheetDialogFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet, container, false)
         binding.lifecycleOwner = this
+
         binding.cancelButton.setOnClickListener {
             this.dismiss()
         }
+
         binding.searchButton.setOnClickListener {
             val id = binding.segment.checkedRadioButtonId
             viewModel.serviceId.value = id
+            println(id.toString())
+            this.dismiss()
         }
+
         return binding.root
     }
 
@@ -58,13 +62,6 @@ class BottomSheetDialog: BottomSheetDialogFragment() {
         }
         return dialog
     }
-
-//    fun showDialog(fragmentManager: FragmentManager){
-//        if (!isShowDialog(fragmentManager, this::class.java.simpleName)){
-//            show(fragmentManager,
-//            this::class.java.simpleName)
-//        }
-//    }
 
     private fun setDialogMatchParent() {
         dialog?.window?.let {

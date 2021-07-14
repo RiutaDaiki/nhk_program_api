@@ -21,7 +21,7 @@ data class ProgramResponse(
 )
 
 data class G1(
-    val e1: List<Title>
+    val g1: List<Title>
 )
 
 data class Title(
