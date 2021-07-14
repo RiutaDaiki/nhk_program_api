@@ -12,7 +12,10 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
+import com.example.nhkprogramapi.databinding.BottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.net.ConnectException
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -35,34 +38,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val bottomSheet = findViewById<ConstraintLayout>(R.id.bottomSheet)
-        bottomSheet.findViewById<Button>(R.id.ca)
-
-        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheet))
-
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_EXPANDED -> viewModel.isBottomSheetExpanded.value = true
-                    BottomSheetBehavior.STATE_COLLAPSED -> viewModel.isBottomSheetExpanded.value = false
-                    else -> {}
-                }
-            }
-        })
-
-
         binding.fab.setOnClickListener {
-            val state =
-                if (viewModel.isBottomSheetExpanded.value == true)
-                    BottomSheetBehavior.STATE_COLLAPSED
-                else
-                    BottomSheetBehavior.STATE_EXPANDED
-            bottomSheetBehavior.state = state
+            com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
         }
+
 //        findViewById<Button>(R.id.button).setOnClickListener{
 //            viewModel.getProgramTitle(localDate()) {
 //                set(it)
