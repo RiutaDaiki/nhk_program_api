@@ -21,16 +21,20 @@ class NhkViewModel : ViewModel() {
         2131230809 to "s3"
     )
 
-    private val programInfoList = MutableLiveData<List<ProgramInfo>>()
-    val content: LiveData<List<ProgramInfo>> = programInfoList
+    val programInfoList = MutableLiveData<List<ProgramInfo>>()
 
     fun getProgramTitle(date: String, service: Int) {
-        Log.d("date", date)
+        println("0")
         viewModelScope.launch(Dispatchers.IO) {
             when (serviceIdMap[service]) {
                 "g1" -> Repository.repository.getSougouProgramTitle(date)
                     .onSuccess {
-                        programInfoList.value = it
+                        println("1")
+                        println(it[0].title)
+                        programInfoList.postValue(it)
+                    }
+                    .onFailure {
+                        println("error")
                     }
                 "e1" -> {
                     Repository.repository.getEteleProgramTitle(date)

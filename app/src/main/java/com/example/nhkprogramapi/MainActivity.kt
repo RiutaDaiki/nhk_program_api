@@ -1,25 +1,14 @@
 package com.example.nhkprogramapi
 
-import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
-import com.example.nhkprogramapi.databinding.BottomSheetBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import java.net.ConnectException
+import com.example.nhkprogramapi.ui.ProgramAdapter
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -30,16 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        fun set(s: String) {
-            val mainHandler = Handler(Looper.getMainLooper())
-            val text = binding.text
-            try {
-                mainHandler.post { text.text = s }
-            } catch (e: Exception) {
-                Log.e("Exception", e.toString())
-            }
-        }
 
         val date = LocalDate.now()
         binding.dateText.text = (date.monthValue + 1).toString()+ " / " + date.dayOfMonth
@@ -55,15 +34,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.content.observe(this){
-            set(it[0].title)
-        }
-
+        viewModel.programInfoList.observe(this){
+            println("3")
+            binding.recyclerView.layoutManager = LinearLayoutManager(this)
+            val adapter = ProgramAdapter(this, viewModel)
+            binding.recyclerView.adapter = adapter
+            ProgramAdapter(this, viewModel).notifyDataSetChanged()
+         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
-        println(LocalDate.now().toString())
         return LocalDate.now().toString()
     }
 }

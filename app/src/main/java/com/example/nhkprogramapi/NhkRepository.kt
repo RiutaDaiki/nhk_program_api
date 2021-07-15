@@ -21,7 +21,6 @@ class NhkRepository {
                         val response = returnSougouService().getProgramInfo("190", "g1", date, BuildConfig.API_KEY)
                         if (response.isSuccessful) {
                             val article = response.body()
-                            article?.list?.g1?.size
                             val result = mutableListOf<ProgramInfo>()
                             if (article?.list?.g1?.size != null){
                                 for (i in article.list.g1.indices)
@@ -30,7 +29,6 @@ class NhkRepository {
                                         article.list.g1.get(i).end_time,
                                         article.list.g1.get(i).title))
                             }
-
                             continuation.resume(result)
                         } else{
                             val e: Exception = IllegalAccessException()
