@@ -1,5 +1,6 @@
 package com.example.nhkprogramapi
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -40,18 +41,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val date = LocalDate.now()
+        binding.dateText.text = (date.monthValue + 1).toString()+ " / " + date.dayOfMonth
+
         binding.fab.setOnClickListener {
             com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
         }
 
         viewModel.serviceId.observe(this){
-
             when(it){
                 -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
-                else -> viewModel.getProgramTitle(localDate(), it){
-                    set(it)
-                }
+                else -> viewModel.getProgramTitle(localDate(), it)
             }
+        }
+
+        viewModel.content.observe(this){
+            set(it[0].title)
         }
 
     }

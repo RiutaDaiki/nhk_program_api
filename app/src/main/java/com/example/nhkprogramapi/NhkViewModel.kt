@@ -1,14 +1,16 @@
 package com.example.nhkprogramapi
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.nhkprogramapi.entity.ProgramInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NhkViewModel: ViewModel() {
-    object Repository{
+class NhkViewModel : ViewModel() {
+    object Repository {
         val repository = NhkRepository()
     }
 
@@ -19,35 +21,36 @@ class NhkViewModel: ViewModel() {
         2131230809 to "s3"
     )
 
-    fun getProgramTitle(date: String, service: Int,callBack: (String) -> Unit){
+    private val programInfoList = MutableLiveData<List<ProgramInfo>>()
+    val content: LiveData<List<ProgramInfo>> = programInfoList
+
+    fun getProgramTitle(date: String, service: Int) {
         Log.d("date", date)
         viewModelScope.launch(Dispatchers.IO) {
-            when(serviceIdMap[service]){
+            when (serviceIdMap[service]) {
                 "g1" -> Repository.repository.getSougouProgramTitle(date)
                     .onSuccess {
-                        callBack(it)
+                        programInfoList.value = it
                     }
-                "e1" ->{
+                "e1" -> {
                     Repository.repository.getEteleProgramTitle(date)
                         .onSuccess {
-                            callBack(it)
                         }
                 }
                 "s1" -> {
                     Repository.repository.getBsProgramTitle(date)
                         .onSuccess {
-                            callBack(it)
                         }
                 }
                 "s3" -> {
                     Repository.repository.getBsPremiumProgramTitle(date)
                         .onSuccess {
-                            callBack(it)
                         }
                 }
             }
 
         }
     }
+
     val serviceId = MutableLiveData<Int>()
 }
