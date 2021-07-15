@@ -21,8 +21,18 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val dayOfWeek = mapOf<String, String>(
+            "MONDAY" to "月",
+            "TUESDAY" to "火",
+            "WEDNESDAY" to "水",
+            "THURSDAY" to "木",
+            "FRIDAY" to "金",
+            "SATURDAY" to "土",
+            "SUNDAY" to "日"
+        )
+
         val date = LocalDate.now()
-        binding.dateText.text = (date.monthValue).toString()+ " / " + date.dayOfMonth
+        binding.dateText.text = (date.monthValue).toString()+ "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
 
         binding.fab.setOnClickListener {
             com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
