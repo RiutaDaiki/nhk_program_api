@@ -25,5 +25,7 @@ data class E1(
 )
 
 data class EteleTitle(
-    val title: String,
-)
+    val start_time: String,
+    val end_time: String,
+    val title: String
+    )

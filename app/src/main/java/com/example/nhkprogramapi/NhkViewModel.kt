@@ -15,8 +15,8 @@ class NhkViewModel : ViewModel() {
     }
 
     val serviceIdMap = mapOf<Int, String>(
-        2131231064 to "g1",
-        2131230879 to "e1",
+        2131231066 to "g1",
+        2131230880 to "e1",
         2131230808 to "s1",
         2131230809 to "s3"
     )
@@ -29,8 +29,6 @@ class NhkViewModel : ViewModel() {
             when (serviceIdMap[service]) {
                 "g1" -> Repository.repository.getSougouProgramTitle(date)
                     .onSuccess {
-                        println("1")
-                        println(it[0].title)
                         programInfoList.postValue(it)
                     }
                     .onFailure {
@@ -39,16 +37,19 @@ class NhkViewModel : ViewModel() {
                 "e1" -> {
                     Repository.repository.getEteleProgramTitle(date)
                         .onSuccess {
+                            programInfoList.postValue(it)
                         }
                 }
                 "s1" -> {
                     Repository.repository.getBsProgramTitle(date)
                         .onSuccess {
+                            programInfoList.postValue(it)
                         }
                 }
                 "s3" -> {
                     Repository.repository.getBsPremiumProgramTitle(date)
                         .onSuccess {
+                            programInfoList.postValue(it)
                         }
                 }
             }

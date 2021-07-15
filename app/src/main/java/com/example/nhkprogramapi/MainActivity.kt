@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
 import com.example.nhkprogramapi.ui.ProgramAdapter
 import java.time.LocalDate
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val date = LocalDate.now()
-        binding.dateText.text = (date.monthValue + 1).toString()+ " / " + date.dayOfMonth
+        binding.dateText.text = (date.monthValue).toString()+ " / " + date.dayOfMonth
 
         binding.fab.setOnClickListener {
             com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)

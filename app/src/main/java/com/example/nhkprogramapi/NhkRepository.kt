@@ -39,16 +39,24 @@ class NhkRepository {
             }
     }
 
-    suspend fun getEteleProgramTitle(date: String): Result<String>{
+    suspend fun getEteleProgramTitle(date: String): Result<List<ProgramInfo>>{
 
         return kotlin.runCatching {
-            suspendCoroutine<String> { continuation ->
+            suspendCoroutine<List<ProgramInfo>> { continuation ->
                 GlobalScope.launch {
 
                     val response = returnEteleService().getProgramInfo("190", "e1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.e1?.get(0)?.title.toString())
+                        val result = mutableListOf<ProgramInfo>()
+                        if (article?.list?.e1?.size != null){
+                            for (i in article.list.e1.indices)
+                                result.add(i, ProgramInfo(
+                                    article.list.e1.get(i).start_time,
+                                    article.list.e1.get(i).end_time,
+                                    article.list.e1.get(i).title))
+                        }
+                        continuation.resume(result)
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
@@ -58,16 +66,24 @@ class NhkRepository {
         }
     }
 
-    suspend fun getBsProgramTitle(date: String): Result<String>{
+    suspend fun getBsProgramTitle(date: String): Result<List<ProgramInfo>>{
 
         return kotlin.runCatching {
-            suspendCoroutine<String> { continuation ->
+            suspendCoroutine<List<ProgramInfo>> { continuation ->
                 GlobalScope.launch {
 
                     val response = returnBsService().getProgramInfo("190", "s1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.s1?.get(0).toString())
+                        val result = mutableListOf<ProgramInfo>()
+                        if (article?.list?.s1?.size != null){
+                            for (i in article.list.s1.indices)
+                                result.add(i, ProgramInfo(
+                                    article.list.s1.get(i).start_time,
+                                    article.list.s1.get(i).end_time,
+                                    article.list.s1.get(i).title))
+                        }
+                        continuation.resume(result)
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)
@@ -77,16 +93,24 @@ class NhkRepository {
         }
     }
 
-    suspend fun getBsPremiumProgramTitle(date: String): Result<String>{
+    suspend fun getBsPremiumProgramTitle(date: String): Result<List<ProgramInfo>>{
 
         return kotlin.runCatching {
-            suspendCoroutine<String> { continuation ->
+            suspendCoroutine<List<ProgramInfo>> { continuation ->
                 GlobalScope.launch {
 
                     val response = returnBsPremiumService().getProgramInfo("190", "s3", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
-                        continuation.resume(article?.list?.s3?.get(0)?.title.toString())
+                        val result = mutableListOf<ProgramInfo>()
+                        if (article?.list?.s3?.size != null){
+                            for (i in article.list.s3.indices)
+                                result.add(i, ProgramInfo(
+                                    article.list.s3.get(i).start_time,
+                                    article.list.s3.get(i).end_time,
+                                    article.list.s3.get(i).title))
+                        }
+                        continuation.resume(result)
                     } else{
                         val e: Exception = IllegalAccessException()
                         continuation.resumeWithException(e)

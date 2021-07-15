@@ -22,9 +22,11 @@ data class Bs1Response(
 )
 
 data class S1(
-    val s1: List<Title>
+    val s1: List<Bs1Title>
 )
 
 data class Bs1Title(
-    val title: String,
-)
+    val start_time: String,
+    val end_time: String,
+    val title: String
+    )
