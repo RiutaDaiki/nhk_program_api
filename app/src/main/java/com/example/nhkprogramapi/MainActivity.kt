@@ -3,14 +3,13 @@ package com.example.nhkprogramapi
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
 import com.example.nhkprogramapi.ui.ProgramAdapter
 import java.time.LocalDate
@@ -18,17 +17,11 @@ import java.time.LocalDate
 class MainActivity : AppCompatActivity() {
     private val viewModel: NhkViewModel by viewModels()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return  super.onCreateOptionsMenu(menu)
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val dayOfWeek = mapOf<String, String>(
             "MONDAY" to "月",
@@ -55,12 +48,30 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.programInfoList.observe(this){
-            println("3")
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
             val adapter = ProgramAdapter(this, viewModel)
             binding.recyclerView.adapter = adapter
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
          }
+
+        binding.root.post(Runnable {
+            showPopup(binding.root)
+        })
+    }
+
+    fun showPopup(v : View){
+        val popup = PopupMenu(this, v)
+        val inflater: MenuInflater = popup.menuInflater
+        inflater.inflate(R.menu.menu_main, popup.menu)
+        popup.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.live_in-> {
+                    println("ナイス")
+                }
+            }
+            true
+        }
+        popup.show()
     }
 //
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
