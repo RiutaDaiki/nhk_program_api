@@ -12,14 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/purple_500</item>
         <!-- Customize your theme here. -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
 
 
     </style>
 
 </resources>
+
+<!--<item name="windowActionBar">false</item>-->
+<!--<item name="windowNoTitle">true</item>-->
+<!--<item name="android:windowContentOverlay">@null</item>-->
+
 
     <!--<item name="android:windowFullscreen">true</item>-->
 
