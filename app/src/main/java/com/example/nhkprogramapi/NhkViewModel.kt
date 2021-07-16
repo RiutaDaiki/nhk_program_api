@@ -78,10 +78,10 @@ class NhkViewModel : ViewModel() {
         "沖縄" to "470"
     )
 
+
     val programInfoList = MutableLiveData<List<ProgramInfo>>()
 
     fun getProgramTitle(date: String, service: Int) {
-        println("0")
         viewModelScope.launch(Dispatchers.IO) {
             when (serviceIdMap[service]) {
                 "g1" -> Repository.repository.getSougouProgramTitle(date)
@@ -117,4 +117,6 @@ class NhkViewModel : ViewModel() {
     val serviceId = MutableLiveData<Int>()
 
     val selectedResidence = MutableLiveData<String>()
+
+    val userResidence = MutableLiveData<String>()
 }

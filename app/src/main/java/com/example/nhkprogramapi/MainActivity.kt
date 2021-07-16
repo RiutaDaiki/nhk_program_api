@@ -1,5 +1,6 @@
 package com.example.nhkprogramapi
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
 import com.example.nhkprogramapi.ui.LiveInDialog
@@ -24,23 +26,16 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-         return when(item.itemId) {
-            R.id.live_in -> {
-                liveInSettring(supportFragmentManager)
-                true
-            }
 
-             else -> super.onOptionsItemSelected(item)
-         }
-
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        getResidence()
 
         val dayOfWeek = mapOf<String, String>(
             "MONDAY" to "月",
@@ -63,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             when(it){
                 -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
                 else -> viewModel.getProgramTitle(localDate(), it)
+
             }
         }
 
@@ -76,12 +72,31 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.live_in -> {
+                LiveInDialog().show(supportFragmentManager, null)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
         return LocalDate.now().toString()
     }
 
-    private fun liveInSettring(fragmentManager: FragmentManager){
+    private fun liveInSettring(){
         LiveInDialog().show(supportFragmentManager, null)
      }
+
+    private fun getResidence(): String?{
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        val result = sharedPref.getString(getString(R.string.residence), "東京")
+        viewModel.userResidence.value = result
+        return result
+    }
 }

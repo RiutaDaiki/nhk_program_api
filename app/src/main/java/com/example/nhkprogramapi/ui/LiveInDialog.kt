@@ -15,6 +15,7 @@ import com.example.nhkprogramapi.databinding.DialogLiveInBinding
 
 class LiveInDialog : DialogFragment() {
     private val viewModel: NhkViewModel by activityViewModels()
+    private lateinit var item: String
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val binding = DialogLiveInBinding.inflate(layoutInflater)
@@ -35,9 +36,7 @@ class LiveInDialog : DialogFragment() {
                 id: Long
             ) {
                 val spinnerParent = parent as Spinner
-                val item = spinnerParent.selectedItem as String
-                println(item)
-
+                item = spinnerParent.selectedItem as String
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -49,7 +48,7 @@ class LiveInDialog : DialogFragment() {
             .setView(binding.root)
             .setMessage("居住地を選択")
             .setPositiveButton("OK") { dialog, which ->
-
+                viewModel.userResidence.value = item
             }
             .setNegativeButton("キャンセル") { dialog, which ->
                 dialog.dismiss()
