@@ -48,32 +48,31 @@ class MainActivity : AppCompatActivity() {
         )
 
         val date = LocalDate.now()
-        binding.dateText.text = (date.monthValue).toString()+ "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
+        binding.dateText.text =
+            (date.monthValue).toString() + "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
 
         binding.fab.setOnClickListener {
             com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
         }
 
-        viewModel.serviceId.observe(this){
-            when(it){
+        viewModel.serviceId.observe(this) {
+            when (it) {
                 -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
                 else -> viewModel.getProgramTitle(localDate(), it)
 
             }
         }
 
-        viewModel.programInfoList.observe(this){
+        viewModel.programInfoList.observe(this) {
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
             val adapter = ProgramAdapter(this, viewModel)
             binding.recyclerView.adapter = adapter
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
-         }
-
-
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.live_in -> {
                 LiveInDialog().show(supportFragmentManager, null)
                 true
@@ -89,11 +88,11 @@ class MainActivity : AppCompatActivity() {
         return LocalDate.now().toString()
     }
 
-    private fun liveInSettring(){
+    private fun liveInSettring() {
         LiveInDialog().show(supportFragmentManager, null)
-     }
+    }
 
-    private fun getResidence(): String?{
+    private fun getResidence(): String? {
         val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
         val result = sharedPref.getString(getString(R.string.residence), "東京")
         viewModel.userResidence.value = result
