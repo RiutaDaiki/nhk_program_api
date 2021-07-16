@@ -3,19 +3,38 @@ package com.example.nhkprogramapi
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuInflater
-import android.view.View
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import android.widget.PopupMenu
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
+import com.example.nhkprogramapi.ui.LiveInDialog
 import com.example.nhkprogramapi.ui.ProgramAdapter
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: NhkViewModel by viewModels()
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         return when(item.itemId) {
+            R.id.live_in -> {
+                liveInSettring(supportFragmentManager)
+                true
+            }
+
+             else -> super.onOptionsItemSelected(item)
+         }
+
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,32 +73,15 @@ class MainActivity : AppCompatActivity() {
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
          }
 
-        binding.root.post(Runnable {
-            showPopup(binding.root)
-        })
-    }
 
-    fun showPopup(v : View){
-        val popup = PopupMenu(this, v)
-        val inflater: MenuInflater = popup.menuInflater
-        inflater.inflate(R.menu.menu_main, popup.menu)
-        popup.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.live_in-> {
-                    println("ナイス")
-                }
-            }
-            true
-        }
-        popup.show()
     }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item)
-//    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
         return LocalDate.now().toString()
     }
+
+    private fun liveInSettring(fragmentManager: FragmentManager){
+        LiveInDialog().show(supportFragmentManager, null)
+     }
 }

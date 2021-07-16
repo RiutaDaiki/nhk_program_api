@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="live_in_array">
+        <item>札幌</item>
+        <item>函館</item>
+        <item>旭川</item>
+        <item>帯広</item>
+        <item>釧路</item>
+        <item>北見</item>
+        <item>室蘭</item>
+        <item>青森</item>
+        <item>盛岡</item>
+        <item>仙台</item>
+        <item>秋田</item>
+        <item>山形</item>
+        <item>福島</item>
+        <item>水戸</item>
+        <item>宇都宮</item>
+        <item>前橋</item>
+        <item>さいたま</item>
+        <item>千葉</item>
+        <item>東京</item>
+        <item>横浜</item>
+        <item>甲府</item>
+        <item>長野</item>
+        <item>新潟</item>
+        <item>富山</item>
+        <item>金沢</item>
+        <item>福井</item>
+        <item>岐阜</item>
+        <item>静岡</item>
+        <item>名古屋</item>
+        <item>津</item>
+        <item>大津</item>
+        <item>京都</item>
+        <item>大阪</item>
+        <item>神戸</item>
+        <item>奈良</item>
+        <item>和歌山</item>
+        <item>鳥取</item>
+        <item>松江</item>
+        <item>岡山</item>
+        <item>広島</item>
+        <item>山口</item>
+        <item>徳島</item>
+        <item>高松</item>
+        <item>松山</item>
+        <item>高知</item>
+        <item>福岡</item>
+        <item>北九州</item>
+        <item>佐賀</item>
+        <item>長崎</item>
+        <item>熊本</item>
+        <item>大分</item>
+        <item>宮崎</item>
+        <item>鹿児島</item>
+        <item>沖縄</item>
+
+    </string-array>
+</resources>
