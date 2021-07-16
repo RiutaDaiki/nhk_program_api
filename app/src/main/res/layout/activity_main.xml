@@ -64,7 +64,18 @@
             android:textSize="30sp"
             android:text="@{viewModel.userResidence}"
             app:layout_constraintStart_toEndOf="@+id/date_text"
-            app:layout_constraintTop_toTopOf="@+id/date_text" />
+            app:layout_constraintBottom_toBottomOf="@+id/date_text" />
+
+        <TextView
+            android:id="@+id/service_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="@{viewModel.serviceId}"
+            app:layout_constraintBottom_toBottomOf="@+id/residence_text"
+            app:layout_constraintStart_toEndOf="@+id/residence_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
                 else -> viewModel.getProgramTitle(localDate(), it)
-
             }
         }
 
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.live_in -> {
-                LiveInDialog().show(supportFragmentManager, null)
+                liveInSettring()
                 true
             }
 

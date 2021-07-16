@@ -18,7 +18,7 @@ class NhkViewModel : ViewModel() {
         2131231066 to "g1",
         2131230880 to "e1",
         2131230808 to "s1",
-        2131230809 to "s3"
+        2131296345 to "s3"
     )
 
     val residenceMap = mapOf<String, String>(
