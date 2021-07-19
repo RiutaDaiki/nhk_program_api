@@ -21,13 +21,6 @@ import java.time.LocalDate
 class MainActivity : AppCompatActivity() {
     private val viewModel: NhkViewModel by viewModels()
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        getResidence()
 
         val dayOfWeek = mapOf<String, String>(
             "MONDAY" to "月",
@@ -71,31 +63,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.live_in -> {
-                liveInSettring()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
         return LocalDate.now().toString()
     }
 
-    private fun liveInSettring() {
-        LiveInDialog().show(supportFragmentManager, null)
-    }
 
-    private fun getResidence(): String? {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-        val result = sharedPref.getString(getString(R.string.residence), "東京")
-        viewModel.userResidence.value = result
-        return result
-    }
+    //課題 チャンネルを変えて検索した際に、少しの間サービステキストとコンテンツに食い違いが起こることがある　
+    //ボトムシートで検索ボタンが押されたらviewModelのisSearching = true
 }

@@ -1,6 +1,5 @@
 package com.example.nhkprogramapi
 
-import android.util.Log
 import com.example.nhkprogramapi.entity.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -12,13 +11,13 @@ import kotlin.coroutines.suspendCoroutine
 
 class NhkRepository {
 
-    suspend fun getSougouProgramTitle(date: String, area: String): Result<List<ProgramInfo>>{
+    suspend fun getSougouProgramTitle(date: String): Result<List<ProgramInfo>>{
 
             return kotlin.runCatching {
                 suspendCoroutine<List<ProgramInfo>> { continuation ->
                     GlobalScope.launch {
 
-                        val response = returnSougouService().getProgramInfo(area, "g1", date, BuildConfig.API_KEY)
+                        val response = returnSougouService().getProgramInfo("130", "g1", date, BuildConfig.API_KEY)
                         if (response.isSuccessful) {
                             val article = response.body()
                             val result = mutableListOf<ProgramInfo>()
@@ -39,13 +38,13 @@ class NhkRepository {
             }
     }
 
-    suspend fun getEteleProgramTitle(date: String, area: String): Result<List<ProgramInfo>>{
+    suspend fun getEteleProgramTitle(date: String): Result<List<ProgramInfo>>{
 
         return kotlin.runCatching {
             suspendCoroutine<List<ProgramInfo>> { continuation ->
                 GlobalScope.launch {
 
-                    val response = returnEteleService().getProgramInfo(area, "e1", date, BuildConfig.API_KEY)
+                    val response = returnEteleService().getProgramInfo("130", "e1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
                         val result = mutableListOf<ProgramInfo>()
@@ -66,13 +65,13 @@ class NhkRepository {
         }
     }
 
-    suspend fun getBsProgramTitle(date: String, area: String): Result<List<ProgramInfo>>{
+    suspend fun getBsProgramTitle(date: String): Result<List<ProgramInfo>>{
 
         return kotlin.runCatching {
             suspendCoroutine<List<ProgramInfo>> { continuation ->
                 GlobalScope.launch {
 
-                    val response = returnBsService().getProgramInfo(area, "s1", date, BuildConfig.API_KEY)
+                    val response = returnBsService().getProgramInfo("130", "s1", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
                         val result = mutableListOf<ProgramInfo>()
@@ -93,13 +92,13 @@ class NhkRepository {
         }
     }
 
-    suspend fun getBsPremiumProgramTitle(date: String, area: String): Result<List<ProgramInfo>>{
+    suspend fun getBsPremiumProgramTitle(date: String): Result<List<ProgramInfo>>{
 
         return kotlin.runCatching {
             suspendCoroutine<List<ProgramInfo>> { continuation ->
                 GlobalScope.launch {
 
-                    val response = returnBsPremiumService().getProgramInfo(area, "s3", date, BuildConfig.API_KEY)
+                    val response = returnBsPremiumService().getProgramInfo("130", "s3", date, BuildConfig.API_KEY)
                     if (response.isSuccessful) {
                         val article = response.body()
                         val result = mutableListOf<ProgramInfo>()

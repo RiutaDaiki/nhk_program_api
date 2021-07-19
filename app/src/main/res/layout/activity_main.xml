@@ -59,26 +59,15 @@
             app:srcCompat="@android:drawable/ic_menu_search" />
 
         <TextView
-            android:id="@+id/residence_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:text="@{viewModel.userResidence}"
-            app:layout_constraintStart_toEndOf="@+id/date_text"
-            app:layout_constraintBottom_toBottomOf="@+id/date_text" />
-
-        <TextView
             android:id="@+id/service_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="50dp"
+            android:text="@{viewModel.serviceNameMap[viewModel.serviceId]}"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="@{viewModel.serviceNameMap[viewModel.serviceId]}"
-            app:layout_constraintBottom_toBottomOf="@+id/residence_text"
-            app:layout_constraintStart_toEndOf="@+id/residence_text" />
+            app:layout_constraintBottom_toBottomOf="@+id/date_text"
+            app:layout_constraintStart_toEndOf="@+id/date_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

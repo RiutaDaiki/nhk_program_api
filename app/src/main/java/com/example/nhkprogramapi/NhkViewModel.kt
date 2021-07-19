@@ -87,14 +87,10 @@ class NhkViewModel : ViewModel() {
 
     val programInfoList = MutableLiveData<List<ProgramInfo>>()
 
-    private fun getResidenceKey(): String{
-        return residenceMap[userResidence.value] ?: "130"
-    }
-
     fun getProgramTitle(date: String, service: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             when (serviceIdMap[service]) {
-                "g1" -> Repository.repository.getSougouProgramTitle(date, getResidenceKey())
+                "g1" -> Repository.repository.getSougouProgramTitle(date)
                     .onSuccess {
                         programInfoList.postValue(it)
                     }
@@ -102,19 +98,19 @@ class NhkViewModel : ViewModel() {
                         println("error")
                     }
                 "e1" -> {
-                    Repository.repository.getEteleProgramTitle(date, getResidenceKey())
+                    Repository.repository.getEteleProgramTitle(date)
                         .onSuccess {
                             programInfoList.postValue(it)
                         }
                 }
                 "s1" -> {
-                    Repository.repository.getBsProgramTitle(date, getResidenceKey())
+                    Repository.repository.getBsProgramTitle(date)
                         .onSuccess {
                             programInfoList.postValue(it)
                         }
                 }
                 "s3" -> {
-                    Repository.repository.getBsPremiumProgramTitle(date, getResidenceKey())
+                    Repository.repository.getBsPremiumProgramTitle(date)
                         .onSuccess {
                             programInfoList.postValue(it)
                         }
@@ -127,4 +123,6 @@ class NhkViewModel : ViewModel() {
     val serviceId = MutableLiveData<Int>()
 
     val userResidence = MutableLiveData<String>()
+
+    val isSearching = MutableLiveData<Boolean>()
 }
