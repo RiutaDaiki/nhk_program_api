@@ -73,7 +73,6 @@
             android:layout_marginStart="16dp"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="@{viewModel.serviceId}"
             app:layout_constraintBottom_toBottomOf="@+id/residence_text"
             app:layout_constraintStart_toEndOf="@+id/residence_text" />
 

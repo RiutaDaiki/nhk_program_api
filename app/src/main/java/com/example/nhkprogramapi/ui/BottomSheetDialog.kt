@@ -30,7 +30,7 @@ class BottomSheetDialog: BottomSheetDialogFragment() {
         }
 
         binding.searchButton.setOnClickListener {
-            val id = binding.segment.checkedRadioButtonId
+            binding.toggleGroup.
             viewModel.serviceId.value = id
             println(id.toString())
             this.dismiss()

@@ -47,27 +47,27 @@ class MainActivity : AppCompatActivity() {
             "SUNDAY" to "日"
         )
 
-        val date = LocalDate.now()
-        binding.dateText.text =
-            (date.monthValue).toString() + "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
-
+//        val date = LocalDate.now()
+//        binding.dateText.text =
+//            (date.monthValue).toString() + "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
+//
         binding.fab.setOnClickListener {
             com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
         }
-
-        viewModel.serviceId.observe(this) {
-            when (it) {
-                -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
-                else -> viewModel.getProgramTitle(localDate(), it)
-            }
-        }
-
-        viewModel.programInfoList.observe(this) {
-            binding.recyclerView.layoutManager = LinearLayoutManager(this)
-            val adapter = ProgramAdapter(this, viewModel)
-            binding.recyclerView.adapter = adapter
-            ProgramAdapter(this, viewModel).notifyDataSetChanged()
-        }
+//
+//        viewModel.serviceId.observe(this) {
+//            when (it) {
+//                -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
+//                else -> viewModel.getProgramTitle(localDate(), it)
+//            }
+//        }
+//
+//        viewModel.programInfoList.observe(this) {
+//            binding.recyclerView.layoutManager = LinearLayoutManager(this)
+//            val adapter = ProgramAdapter(this, viewModel)
+//            binding.recyclerView.adapter = adapter
+//            ProgramAdapter(this, viewModel).notifyDataSetChanged()
+//        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
