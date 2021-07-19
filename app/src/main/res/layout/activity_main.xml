@@ -40,7 +40,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_marginBottom="16dp"/>
 
 
 
@@ -73,7 +76,7 @@
             android:layout_marginStart="16dp"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:text="@{viewModel.serviceId}"
+            android:text="@{viewModel.serviceNameMap[viewModel.serviceId]}"
             app:layout_constraintBottom_toBottomOf="@+id/residence_text"
             app:layout_constraintStart_toEndOf="@+id/residence_text" />
 

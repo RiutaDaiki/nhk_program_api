@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             val adapter = ProgramAdapter(this, viewModel)
             binding.recyclerView.adapter = adapter
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
+            binding.recyclerView.background = resources.getDrawable(R.drawable.border)
         }
     }
 

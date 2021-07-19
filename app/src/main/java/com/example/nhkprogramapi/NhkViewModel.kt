@@ -1,7 +1,5 @@
 package com.example.nhkprogramapi
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,11 +13,19 @@ class NhkViewModel : ViewModel() {
     }
 
     val serviceIdMap = mapOf<Int, String>(
-        2131231066 to "g1",
-        2131230880 to "e1",
-        2131230808 to "s1",
-        2131296345 to "s3"
+        2131296697 to "g1",
+        2131296695 to "e1",
+        2131296693 to "s1",
+        2131296694 to "s3"
     )
+
+    val serviceNameMap = mapOf<Int, String>(
+        2131296697 to "総合",
+        2131296695 to "Eテレ",
+        2131296693 to "BS1",
+        2131296694 to "BSプレミアム"
+    )
+
 
     val residenceMap = mapOf<String, String>(
         "札幌" to "010",
