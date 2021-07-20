@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nhkprogramapi.entity.ProgramInfo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 class NhkViewModel : ViewModel() {
@@ -13,17 +14,17 @@ class NhkViewModel : ViewModel() {
     }
 
     val serviceIdMap = mapOf<Int, String>(
-        2131296697 to "g1",
-        2131296695 to "e1",
-        2131296693 to "s1",
-        2131296694 to "s3"
+        2131296604 to "g1",
+        2131296416 to "e1",
+        2131296344 to "s1",
+        2131296345 to "s3"
     )
 
     val serviceNameMap = mapOf<Int, String>(
-        2131296697 to "総合",
-        2131296695 to "Eテレ",
-        2131296693 to "BS1",
-        2131296694 to "BSプレミアム"
+        2131296604 to "総合",
+        2131296416 to "Eテレ",
+        2131296344 to "BS1",
+        2131296345 to "BSプレミアム"
     )
 
 
@@ -88,10 +89,14 @@ class NhkViewModel : ViewModel() {
     val programInfoList = MutableLiveData<List<ProgramInfo>>()
 
     fun getProgramTitle(date: String, service: Int) {
+        println("0")
+
         viewModelScope.launch(Dispatchers.IO) {
             when (serviceIdMap[service]) {
                 "g1" -> Repository.repository.getSougouProgramTitle(date)
                     .onSuccess {
+                        println("1")
+                        updateIsSearching(false)
                         programInfoList.postValue(it)
                     }
                     .onFailure {
@@ -100,18 +105,21 @@ class NhkViewModel : ViewModel() {
                 "e1" -> {
                     Repository.repository.getEteleProgramTitle(date)
                         .onSuccess {
+                            updateIsSearching(false)
                             programInfoList.postValue(it)
                         }
                 }
                 "s1" -> {
                     Repository.repository.getBsProgramTitle(date)
                         .onSuccess {
+                            updateIsSearching(false)
                             programInfoList.postValue(it)
                         }
                 }
                 "s3" -> {
                     Repository.repository.getBsPremiumProgramTitle(date)
                         .onSuccess {
+                            updateIsSearching(false)
                             programInfoList.postValue(it)
                         }
                 }
@@ -124,5 +132,12 @@ class NhkViewModel : ViewModel() {
 
     val userResidence = MutableLiveData<String>()
 
-    val isSearching = MutableLiveData<Boolean>()
+    private val _isSearching = MutableSharedFlow<Boolean>()
+    val isSearching = _isSearching
+    fun updateIsSearching(bool: Boolean){
+        viewModelScope.launch {
+            _isSearching.emit(bool)
+        }
+    }
+
 }

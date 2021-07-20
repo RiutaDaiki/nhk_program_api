@@ -1,21 +1,17 @@
 package com.example.nhkprogramapi
 
-import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
-import com.example.nhkprogramapi.ui.LiveInDialog
 import com.example.nhkprogramapi.ui.ProgramAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -60,6 +56,13 @@ class MainActivity : AppCompatActivity() {
             binding.recyclerView.adapter = adapter
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
             binding.recyclerView.background = resources.getDrawable(R.drawable.border)
+        }
+        lifecycleScope.launch {
+            viewModel.isSearching.collect {
+                println("collect")
+                if (it) binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
+                else binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
+            }
         }
     }
 

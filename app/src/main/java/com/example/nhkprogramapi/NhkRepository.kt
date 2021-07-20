@@ -12,6 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 class NhkRepository {
 
     suspend fun getSougouProgramTitle(date: String): Result<List<ProgramInfo>>{
+        println("6")
 
             return kotlin.runCatching {
                 suspendCoroutine<List<ProgramInfo>> { continuation ->
