@@ -12,7 +12,6 @@ import kotlin.coroutines.suspendCoroutine
 class NhkRepository {
 
     suspend fun getSougouProgramTitle(date: String): Result<List<ProgramInfo>>{
-        println("6")
 
             return kotlin.runCatching {
                 suspendCoroutine<List<ProgramInfo>> { continuation ->
@@ -152,6 +151,3 @@ class NhkRepository {
             .create(NhkBsPremium::class.java)
     }
 }
-
-//"start_time": "2021-07-14T04:32:00+09:00",
-//"end_time": "2021-07-14T04:35:00+09:00",

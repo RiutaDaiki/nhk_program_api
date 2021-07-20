@@ -3,15 +3,20 @@ package com.example.nhkprogramapi
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.nhkprogramapi.databinding.ActivityMainBinding
 import com.example.nhkprogramapi.ui.ProgramAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -60,18 +65,32 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.isSearching.collect {
                 println("collect")
-                if (it) binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
-                else binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
+                if (it == true) binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
+                else if (it == false) binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
+                else {
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@MainActivity, "番組表の取得に失敗しました", Toast.LENGTH_SHORT).show()
+                    }
+                    binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
+                }
             }
         }
+
+        val fab = binding.fab
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(binding.recyclerView, dx, dy)
+                if (dy > 0 && fab.visibility === View.VISIBLE) {
+                    fab.hide()
+                } else if (dy < 0 && fab.visibility !== View.VISIBLE) {
+                    fab.show()
+                }
+            }
+        })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun localDate(): String {
         return LocalDate.now().toString()
     }
-
-
-    //課題 チャンネルを変えて検索した際に、少しの間サービステキストとコンテンツに食い違いが起こることがある　
-    //ボトムシートで検索ボタンが押されたらviewModelのisSearching = true
 }
