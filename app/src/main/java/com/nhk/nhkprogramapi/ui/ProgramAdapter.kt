@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.nhk.nhkprogramapi.NhkViewModel
 import com.nhk.nhkprogramapi.databinding.ItemRecyclerBinding
+import kotlinx.android.synthetic.main.item_recycler.view.*
 
 class ProgramAdapter(
     private val lifecycleOwner: LifecycleOwner,
