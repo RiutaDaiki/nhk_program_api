@@ -15,7 +15,12 @@ class ProgramAdapter(
     private lateinit var binding: ItemRecyclerBinding
 
     inner class ProgramViewHolder(val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root){
-
+//        init {
+//            binding.root.setOnClickListener {
+//                println("クリック")
+//                binding.expandable.toggle()
+//            }
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgramViewHolder {
@@ -31,7 +36,10 @@ class ProgramAdapter(
         val programTime = rowData?.start?.substring(11..15) + " ~ " + rowData?.end?.substring(11..15)
         holder.binding.timeText.text = programTime
         holder.binding.titleText.text = rowData?.title
-
+        holder.binding.cardView.setOnClickListener {
+            println("カーど")
+            binding.expandable.toggle()
+        }
     }
 
     override fun getItemCount(): Int {
