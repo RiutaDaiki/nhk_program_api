@@ -1,4 +1,4 @@
-package com.example.nhkprogramapi.ui
+package com.nhk.nhkprogramapi.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -11,9 +11,9 @@ import android.widget.Spinner
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.nhkprogramapi.NhkViewModel
-import com.example.nhkprogramapi.R
-import com.example.nhkprogramapi.databinding.DialogLiveInBinding
+import com.nhk.nhkprogramapi.NhkViewModel
+import com.nhk.nhkprogramapi.R
+import com.nhk.nhkprogramapi.databinding.DialogLiveInBinding
 import kotlinx.coroutines.launch
 
 class LiveInDialog : DialogFragment() {

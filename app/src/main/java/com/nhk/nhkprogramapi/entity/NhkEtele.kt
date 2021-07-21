@@ -1,12 +1,11 @@
-package com.example.nhkprogramapi.entity
-
+package com.nhk.nhkprogramapi.entity
 
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface NhkBs1 {
+interface NhkEtele {
     @GET("/v2/pg/list/{area}/{service}/{date}.json")
     suspend fun getProgramInfo(
         @Path("area") area: String,
@@ -14,18 +13,18 @@ interface NhkBs1 {
         @Path("date") date: String,
         @Query("key") apiKey: String
 
-    ): Response<Bs1Response>
+    ): Response<EteleResponse>
 }
 
-data class Bs1Response(
-    val list: S1
+data class EteleResponse(
+    val list: E1
 )
 
-data class S1(
-    val s1: List<Bs1Title>
+data class E1(
+    val e1: List<EteleTitle>
 )
 
-data class Bs1Title(
+data class EteleTitle(
     val start_time: String,
     val end_time: String,
     val title: String

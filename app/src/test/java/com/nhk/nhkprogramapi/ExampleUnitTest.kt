@@ -1,4 +1,4 @@
-package com.example.nhkprogramapi
+package com.nhk.nhkprogramapi
 
 import org.junit.Test
 

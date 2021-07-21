@@ -1,11 +1,11 @@
-package com.example.nhkprogramapi.ui
+package com.nhk.nhkprogramapi.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nhkprogramapi.NhkViewModel
-import com.example.nhkprogramapi.databinding.ItemRecyclerBinding
+import com.nhk.nhkprogramapi.NhkViewModel
+import com.nhk.nhkprogramapi.databinding.ItemRecyclerBinding
 
 class ProgramAdapter(
     private val lifecycleOwner: LifecycleOwner,

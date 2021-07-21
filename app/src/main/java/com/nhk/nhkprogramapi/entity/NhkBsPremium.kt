@@ -1,4 +1,4 @@
-package com.example.nhkprogramapi.entity
+package com.nhk.nhkprogramapi.entity
 
 
 import retrofit2.Response

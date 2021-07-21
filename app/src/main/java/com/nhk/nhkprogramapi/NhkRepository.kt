@@ -1,6 +1,6 @@
-package com.example.nhkprogramapi
+package com.nhk.nhkprogramapi
 
-import com.example.nhkprogramapi.entity.*
+import com.nhk.nhkprogramapi.entity.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit

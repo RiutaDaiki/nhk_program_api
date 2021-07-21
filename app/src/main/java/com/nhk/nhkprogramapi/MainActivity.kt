@@ -1,18 +1,17 @@
-package com.example.nhkprogramapi
+package com.nhk.nhkprogramapi
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nhkprogramapi.databinding.ActivityMainBinding
-import com.example.nhkprogramapi.ui.ProgramAdapter
+import com.nhk.nhkprogramapi.databinding.ActivityMainBinding
+import com.nhk.nhkprogramapi.ui.ProgramAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             (date.monthValue).toString() + "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
 
         binding.fab.setOnClickListener {
-            com.example.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
+            com.nhk.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
         }
 
         viewModel.serviceId.observe(this) {
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             val adapter = ProgramAdapter(this, viewModel)
             binding.recyclerView.adapter = adapter
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
-            binding.recyclerView.background = resources.getDrawable(R.drawable.border)
+//            binding.recyclerView.background = resources.getDrawable(R.drawable.border)
         }
         lifecycleScope.launch {
             viewModel.isSearching.collect {

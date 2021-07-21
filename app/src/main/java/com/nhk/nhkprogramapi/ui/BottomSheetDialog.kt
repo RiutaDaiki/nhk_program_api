@@ -1,4 +1,4 @@
-package com.example.nhkprogramapi.ui
+package com.nhk.nhkprogramapi.ui
 
 import android.app.Dialog
 import android.os.Bundle
@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import com.example.nhkprogramapi.NhkViewModel
-import com.example.nhkprogramapi.R
+import com.nhk.nhkprogramapi.NhkViewModel
+import com.nhk.nhkprogramapi.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.example.nhkprogramapi.databinding.BottomSheetBinding
+import com.nhk.nhkprogramapi.databinding.BottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

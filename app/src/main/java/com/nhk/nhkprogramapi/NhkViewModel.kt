@@ -1,9 +1,9 @@
-package com.example.nhkprogramapi
+package com.nhk.nhkprogramapi
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.nhkprogramapi.entity.ProgramInfo
+import com.nhk.nhkprogramapi.entity.ProgramInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
