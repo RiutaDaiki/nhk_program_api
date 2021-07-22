@@ -35,11 +35,8 @@ class ProgramAdapter(
         val programTime = rowData?.start?.substring(11..15) + " ~ " + rowData?.end?.substring(11..15)
         holder.binding.timeText.text = programTime
         holder.binding.titleText.text = rowData?.title
-        holder.binding.expandText.text = rowData?.subtitle
-//        holder.binding.cardView.setOnClickListener {
-//            println("カーど")
-//            binding.expandable.toggle()
-//        }
+        if (rowData?.subtitle != "　") holder.binding.expandText.text = rowData?.subtitle
+        else holder.binding.expandText.text = "放送休止"
     }
 
     override fun getItemCount(): Int {
