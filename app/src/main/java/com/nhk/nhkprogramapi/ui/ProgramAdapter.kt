@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.nhk.nhkprogramapi.NhkViewModel
 import com.nhk.nhkprogramapi.databinding.ItemRecyclerBinding
-import kotlinx.android.synthetic.main.item_recycler.view.*
 
 class ProgramAdapter(
     private val lifecycleOwner: LifecycleOwner,
@@ -15,12 +14,7 @@ class ProgramAdapter(
     private lateinit var binding: ItemRecyclerBinding
 
     inner class ProgramViewHolder(val binding: ItemRecyclerBinding): RecyclerView.ViewHolder(binding.root){
-//        init {
-//            binding.root.setOnClickListener {
-//                println("クリック")
-//                binding.expandable.toggle()
-//            }
-//        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgramViewHolder {
