@@ -27,5 +27,6 @@ data class G1(
 data class Title(
     val start_time: String,
     val end_time: String,
-    val title: String
+    val title: String,
+    val subtitle: String
     )

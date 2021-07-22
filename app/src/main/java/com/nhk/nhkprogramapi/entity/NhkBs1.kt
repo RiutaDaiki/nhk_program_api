@@ -28,5 +28,6 @@ data class S1(
 data class Bs1Title(
     val start_time: String,
     val end_time: String,
-    val title: String
+    val title: String,
+    val subtitle: String
     )

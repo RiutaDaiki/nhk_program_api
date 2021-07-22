@@ -26,7 +26,8 @@ class NhkRepository {
                                     result.add(i, ProgramInfo(
                                         article.list.g1.get(i).start_time,
                                         article.list.g1.get(i).end_time,
-                                        article.list.g1.get(i).title))
+                                        article.list.g1.get(i).title,
+                                        article.list.g1.get(i).subtitle))
                             }
                             continuation.resume(result)
                         } else{
@@ -53,7 +54,8 @@ class NhkRepository {
                                 result.add(i, ProgramInfo(
                                     article.list.e1.get(i).start_time,
                                     article.list.e1.get(i).end_time,
-                                    article.list.e1.get(i).title))
+                                    article.list.e1.get(i).title,
+                                    article.list.e1.get(i).subtitle))
                         }
                         continuation.resume(result)
                     } else{
@@ -80,7 +82,8 @@ class NhkRepository {
                                 result.add(i, ProgramInfo(
                                     article.list.s1.get(i).start_time,
                                     article.list.s1.get(i).end_time,
-                                    article.list.s1.get(i).title))
+                                    article.list.s1.get(i).title,
+                                    article.list.s1.get(i).subtitle))
                         }
                         continuation.resume(result)
                     } else{
@@ -107,7 +110,8 @@ class NhkRepository {
                                 result.add(i, ProgramInfo(
                                     article.list.s3.get(i).start_time,
                                     article.list.s3.get(i).end_time,
-                                    article.list.s3.get(i).title))
+                                    article.list.s3.get(i).title,
+                                    article.list.s3.get(i).subtitle))
                         }
                         continuation.resume(result)
                     } else{
