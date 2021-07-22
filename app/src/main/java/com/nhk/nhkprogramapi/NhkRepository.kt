@@ -27,7 +27,8 @@ class NhkRepository {
                                         article.list.g1.get(i).start_time,
                                         article.list.g1.get(i).end_time,
                                         article.list.g1.get(i).title,
-                                        article.list.g1.get(i).subtitle))
+                                        article.list.g1.get(i).content,
+                                        article.list.g1.get(i).act))
                             }
                             continuation.resume(result)
                         } else{
@@ -55,7 +56,8 @@ class NhkRepository {
                                     article.list.e1.get(i).start_time,
                                     article.list.e1.get(i).end_time,
                                     article.list.e1.get(i).title,
-                                    article.list.e1.get(i).subtitle))
+                                    article.list.e1.get(i).content,
+                                    article.list.e1.get(i).act))
                         }
                         continuation.resume(result)
                     } else{
@@ -83,7 +85,8 @@ class NhkRepository {
                                     article.list.s1.get(i).start_time,
                                     article.list.s1.get(i).end_time,
                                     article.list.s1.get(i).title,
-                                    article.list.s1.get(i).subtitle))
+                                    article.list.s1.get(i).content,
+                                    article.list.s1.get(i).act))
                         }
                         continuation.resume(result)
                     } else{
@@ -111,7 +114,8 @@ class NhkRepository {
                                     article.list.s3.get(i).start_time,
                                     article.list.s3.get(i).end_time,
                                     article.list.s3.get(i).title,
-                                    article.list.s3.get(i).subtitle))
+                                    article.list.s3.get(i).content,
+                                    article.list.s3.get(i).act))
                         }
                         continuation.resume(result)
                     } else{

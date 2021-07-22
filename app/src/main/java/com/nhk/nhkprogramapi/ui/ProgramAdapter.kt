@@ -1,7 +1,10 @@
 package com.nhk.nhkprogramapi.ui
 
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.nhk.nhkprogramapi.NhkViewModel
@@ -35,8 +38,9 @@ class ProgramAdapter(
         val programTime = rowData?.start?.substring(11..15) + " ~ " + rowData?.end?.substring(11..15)
         holder.binding.timeText.text = programTime
         holder.binding.titleText.text = rowData?.title
-        if (rowData?.subtitle != "　") holder.binding.expandText.text = rowData?.subtitle
-        else holder.binding.expandText.text = "放送休止"
+
+        holder.binding.detailText.text = rowData?.content
+        holder.binding.actorText.text = rowData?.act
     }
 
     override fun getItemCount(): Int {

@@ -43,29 +43,31 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/main_content"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:id="@+id/time_text"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/title_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/time_text" />
+
+                        <TextView
+                            android:id="@+id/time_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/time_text" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,16 +79,49 @@
                         android:layout_height="wrap_content"
                         app:el_duration="300">
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/expandable_content"
                             android:layout_width="match_parent"
+                            android:padding="4dp"
+                            android:background="@color/human"
                             android:layout_height="wrap_content">
+                            
+                            <TextView
+                                android:id="@+id/detail"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:text="@string/detail"
+                                android:layout_marginBottom="4dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
 
                             <TextView
-                                android:id="@+id/expand_text"
+                                android:id="@+id/detail_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/detail"
                                 android:gravity="center_horizontal" />
-                        </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/actor"
+                                app:layout_constraintTop_toBottomOf="@id/detail_text"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:text="@string/actor"
+                                android:layout_marginBottom="4dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:id="@+id/actor_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/actor"
+                                android:gravity="center_horizontal" />
+
+
+                            
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     </net.cachapa.expandablelayout.ExpandableLayout>
