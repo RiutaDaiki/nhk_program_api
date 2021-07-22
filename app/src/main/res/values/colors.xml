@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="silver">#c0c0c0</color>
     <color name="human">#fffaf0</color>
+    <color name="dark_gray">#696969</color>
 </resources>

@@ -1,10 +1,8 @@
 package com.nhk.nhkprogramapi.ui
 
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.nhk.nhkprogramapi.NhkViewModel
@@ -41,6 +39,9 @@ class ProgramAdapter(
 
         holder.binding.detailText.text = rowData?.content
         holder.binding.actorText.text = rowData?.act
+        if (rowData?.act == rowData?.content) {
+            holder.binding.detailText.text = ""
+        }
     }
 
     override fun getItemCount(): Int {

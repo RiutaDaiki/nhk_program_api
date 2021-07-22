@@ -88,6 +88,8 @@
                             
                             <TextView
                                 android:id="@+id/detail"
+                                android:textSize="17sp"
+                                android:textColor="@color/dark_gray"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 android:text="@string/detail"
@@ -104,6 +106,8 @@
 
                             <TextView
                                 android:id="@+id/actor"
+                                android:textSize="17sp"
+                                android:textColor="@color/dark_gray"
                                 app:layout_constraintTop_toBottomOf="@id/detail_text"
                                 app:layout_constraintStart_toStartOf="parent"
                                 android:text="@string/actor"
