@@ -140,4 +140,6 @@ class NhkViewModel : ViewModel() {
         }
     }
 
+    val date = MutableLiveData<String>()
+
 }

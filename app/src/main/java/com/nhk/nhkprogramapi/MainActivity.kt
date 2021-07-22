@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         val date = LocalDate.now()
-        binding.dateText.text =
-            (date.monthValue).toString() + "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
+        val date_text = (date.monthValue).toString() + "/" + date.dayOfMonth + " " + dayOfWeek[date.dayOfWeek.toString()]
+        viewModel.date.value = date_text
 
         binding.fab.setOnClickListener {
             com.nhk.nhkprogramapi.ui.BottomSheetDialog().show(supportFragmentManager, null)
@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             val adapter = ProgramAdapter(this, viewModel)
             binding.recyclerView.adapter = adapter
             ProgramAdapter(this, viewModel).notifyDataSetChanged()
-//            binding.recyclerView.background = resources.getDrawable(R.drawable.border)
         }
         lifecycleScope.launch {
             viewModel.isSearching.collect {

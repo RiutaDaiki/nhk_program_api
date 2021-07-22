@@ -2,7 +2,6 @@ package com.nhk.nhkprogramapi.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.nhk.nhkprogramapi.NhkViewModel
