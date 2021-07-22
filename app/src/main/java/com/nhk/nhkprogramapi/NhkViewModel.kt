@@ -14,17 +14,17 @@ class NhkViewModel : ViewModel() {
     }
 
     val serviceIdMap = mapOf<Int, String>(
-        2131296613 to "g1",
-        2131296419 to "e1",
-        2131296346 to "s1",
-        2131296347 to "s3"
+        2131296615 to "g1",
+        2131296421 to "e1",
+        2131296348 to "s1",
+        2131296349 to "s3"
     )
 
     val serviceNameMap = mapOf<Int, String>(
-        2131296613 to "総合",
-        2131296419 to "Eテレ",
-        2131296346 to "BS1",
-        2131296347 to "BSプレミアム"
+        2131296615 to "総合",
+        2131296421 to "Eテレ",
+        2131296348 to "BS1",
+        2131296349 to "BSプレミアム"
     )
 
 
