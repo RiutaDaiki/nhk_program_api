@@ -32,8 +32,8 @@ class BottomSheetDialog: BottomSheetDialogFragment() {
         binding.searchButton.setOnClickListener {
             val id = binding.segment.checkedRadioButtonId
             viewModel.serviceId.value = id
-            viewModel.updateIsSearching(true)
-            println(id.toString())
+            if (id != -1) viewModel.updateIsSearching(true)
+            println(id)
             this.dismiss()
         }
 

@@ -21,6 +21,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    app:sc_tint_color="@color/main"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -66,21 +67,21 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/segment"
-                    android:backgroundTint="@color/purple_500"
                     android:textColor="@color/white"
-                    style="?attr/materialButtonOutlinedStyle"
-                    app:rippleColor="@color/white"
-                    app:strokeColor="@color/purple_500"/>
+                    app:backgroundTint="@color/sub"
+                    app:rippleColor="@color/white"/>
 
                 <Button
                     android:id="@+id/cancel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
+                    android:textColor="@color/sub"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:rippleColor="@color/sub"
                     app:layout_constraintTop_toBottomOf="@+id/search_button"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>

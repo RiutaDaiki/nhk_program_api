@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="silver">#c0c0c0</color>
-    <color name="human">#fffaf0</color>
+    <color name="human">#faf0e6</color>
     <color name="dark_gray">#696969</color>
+    <color name="main">#e9967a</color>
+    <color name="sub">#8b0000</color>
 </resources>

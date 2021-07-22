@@ -49,7 +49,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.serviceId.observe(this) {
             when (it) {
-                -1 -> Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
+                -1 -> {
+                    Toast.makeText(this, "チャンネル選択せい", Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        viewModel.isSearching.emit(false)
+                    }
+                }
                 else -> viewModel.getProgramTitle(localDate(), it)
             }
         }
@@ -63,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         }
         lifecycleScope.launch {
             viewModel.isSearching.collect {
-                println("collect")
                 if (it == true) binding.progressBar.visibility = android.widget.ProgressBar.VISIBLE
                 else if (it == false) binding.progressBar.visibility = android.widget.ProgressBar.INVISIBLE
                 else {
